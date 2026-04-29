@@ -2,15 +2,20 @@
 
 namespace App\Providers;
 
+use App\Models\PersonalAccessToken;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Sanctum\Sanctum;
-use MongoDB\Laravel\Sanctum\PersonalAccessToken; // Pastikan import ini ada
 
 class AppServiceProvider extends ServiceProvider
 {
+    /**
+     * Bootstrap any application services.
+     */
     public function boot(): void
     {
-        // Mengubah model default Sanctum ke MongoDB
+
+        // Ini memaksa Sanctum untuk tahu bahwa dia harus memakai model kita (MongoDB)
+        // bukan model bawaan SQL.
         Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
     }
 }

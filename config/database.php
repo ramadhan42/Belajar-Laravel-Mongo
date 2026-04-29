@@ -17,7 +17,9 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'sqlite'),
+    // 'default' => env('DB_CONNECTION', 'sqlite'),
+
+    'default' => env('DB_CONNECTION', 'mongodb'), // Pastikan ini 'mongodb'
 
     /*
     |--------------------------------------------------------------------------
@@ -34,8 +36,8 @@ return [
 
         'mongodb' => [
             'driver' => 'mongodb',
-            'dsn' => env('MONGODB_URI'),
-            'database' => env('MONGODB_DATABASE'),
+            'dsn' => env('DB_DSN'), // Membaca string lengkap dari .env
+            'database' => env('DB_DATABASE', 'forge'),
         ],
 
         'sqlite' => [

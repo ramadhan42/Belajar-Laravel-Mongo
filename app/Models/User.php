@@ -2,22 +2,19 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Database\Factories\UserFactory;
+// PENTING: Gunakan Authenticatable dari MongoDB Laravel
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use MongoDB\Laravel\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens; // Jika Anda pakai Sanctum untuk API
-
+use Laravel\Sanctum\HasApiTokens;
+use MongoDB\Laravel\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
-    use HasApiTokens; // Jika Anda pakai Sanctum untuk API
+    use HasApiTokens, HasFactory, Notifiable;
 
-    // Menghubungkan ke collection 'users' di MongoDB
+    // Paksa menggunakan koneksi mongodb
     protected $connection = 'mongodb';
+
     protected $collection = 'users';
 
     protected $fillable = [
@@ -46,4 +43,39 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getAuthIdentifier() {}
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getAuthIdentifierName() {}
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getAuthPassword() {}
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getAuthPasswordName() {}
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getRememberToken() {}
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getRememberTokenName() {}
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setRememberToken($value) {}
 }

@@ -7,5 +7,6 @@ use Laravel\Sanctum\PersonalAccessToken as SanctumPersonalAccessToken;
 
 class PersonalAccessToken extends SanctumPersonalAccessToken
 {
-    protected $connection = 'mongodb'; // Pastikan koneksi ke mongodb
+    protected $connection = 'mongodb';
+    protected $collection = 'personal_access_tokens'; // Nama collection di MongoDB
 }
